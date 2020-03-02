@@ -1,0 +1,6 @@
+float64 setThrottle 		#0.0 (No throttle) to 1.0 (Full throttle) 
+float64 jerk			#Set maximal jerk in (m/s³)
+uint8 jerkMode			#Set jerk waveform 0 = rectangle function, 1 = sin wave
+---
+float64 currentThrottlePosition #New throttle positon if success, old throttle position if failure
+uint8 success 			#1 if the controller could interpret the command, 0 if another module is already controling this actor
