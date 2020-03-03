@@ -2,12 +2,13 @@
 from __future__ import print_function
 from hal.srv import Throttle, ThrottleResponse
 from hal.srv import SteeringSrv, SteeringSrvResponse
-from hal.srv import FootBreak, FootBreakResponse
+from hal.srv import FootBrake, FootBrakeResponse
+
 #from airsimCommunicator import get_airsim_communicator
 
-import steering_server
-import throttle_server
-import break_server
+from actors.steering import steering_server
+from actors.throttle import throttle_server
+from actors.brake import brake_server
 
 import rospy
 import airsim
@@ -17,7 +18,7 @@ controls = None
 
 def startServices():
     rospy.init_node('car_control_node')
-    s = rospy.Service('set_break_value', FootBreak, break_server.set_foot_brake_pressure)
+    s = rospy.Service('set_brake_value', FootBrake, brake_server.set_foot_brake_pressure)
     print ('Brake service online')
     s = rospy.Service('set_steering_angle', SteeringSrv, steering_server.set_steering_angle)
     print ('Steering service online')
@@ -35,5 +36,5 @@ if __name__ == "__main__":
 
     steering_server.set_airsim_client_and_controls(client, controls)
     throttle_server.set_airsim_client_and_controls(client, controls)
-    break_server.set_airsim_client_and_controls(client, controls)
+    brake_server.set_airsim_client_and_controls(client, controls)
     startServices()
